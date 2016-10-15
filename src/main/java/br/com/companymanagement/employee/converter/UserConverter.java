@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.companymanagement.common.dto.UserDTO;
-import br.com.companymanagement.employee.entity.User;
+import br.com.companymanagement.common.entity.User;
 
 public class UserConverter {
 
