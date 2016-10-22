@@ -11,7 +11,7 @@ public class UserConverter {
 	public static UserDTO getUserDTO(User user){
 		UserDTO userDTO = new UserDTO();
 		if(user != null){
-			userDTO.setId(user.getId());
+			userDTO.setCpf(user.getCpf());
 			userDTO.setName(user.getName());
 			userDTO.setUsername(user.getUsername());
 			userDTO.setPassword(user.getPassword());
