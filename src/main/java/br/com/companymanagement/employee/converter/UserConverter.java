@@ -1,5 +1,6 @@
 package br.com.companymanagement.employee.converter;
 
+import static org.springframework.beans.BeanUtils.copyProperties;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,13 +11,8 @@ public class UserConverter {
 
 	public static UserDTO getUserDTO(User user){
 		UserDTO userDTO = new UserDTO();
-		if(user != null){
-			userDTO.setCpf(user.getCpf());
-			userDTO.setName(user.getName());
-			userDTO.setUsername(user.getUsername());
-			userDTO.setPassword(user.getPassword());
-			userDTO.setRole(user.getRole());
-		}
+		copyProperties(user, userDTO);
+		
 		return userDTO;
 	}
 	
@@ -26,5 +22,12 @@ public class UserConverter {
 			userDTOs.add(getUserDTO(user));
 		}
 		return userDTOs;
+	}
+	
+	public static User getUser(UserDTO userDTO){
+		User user = new User();
+		copyProperties(userDTO, user);
+		
+		return user;
 	}
 }
