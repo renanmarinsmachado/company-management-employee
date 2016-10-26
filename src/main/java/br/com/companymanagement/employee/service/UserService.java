@@ -31,6 +31,14 @@ public class UserService {
 		return getListUserDTO(repository.findAll());
 	}
 	
+	public UserDTO get(String id){
+		if(StringUtils.isNotEmpty(id)){
+			return getUserDTO(repository.findOne(Long.parseLong(id)));
+		}
+		
+		return new UserDTO();
+	}
+	
 	public UserDTO save(UserDTO userDTO){
 		userDTO.setPassword(new BCryptPasswordEncoder().encode(userDTO.getPassword()));
 		User user = repository.save(getUser(userDTO));
@@ -45,6 +53,10 @@ public class UserService {
 		// apply patch
 		resource = applyPatch(patch, resource, UserDTO.class);
 
+		if(!resource.getPassword().equals(entity.getPassword())){
+			resource.setPassword(new BCryptPasswordEncoder().encode(resource.getPassword()));
+		}
+		
 		// persist
 		entity = getUser(resource);
 		entity = repository.save(entity);

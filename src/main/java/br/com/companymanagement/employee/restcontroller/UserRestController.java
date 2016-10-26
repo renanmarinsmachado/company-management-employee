@@ -37,6 +37,12 @@ public class UserRestController {
 		return new ResponseEntity<List<UserDTO>>(service.list(username), OK);
 	}
 	
+	@RequestMapping(value="/{id}", method=RequestMethod.GET)
+	@Transactional(readOnly = true)
+	public ResponseEntity<UserDTO> get(@PathVariable("id") String id){
+		return new ResponseEntity<UserDTO>(service.get(id), OK);
+	}
+	
 	@RequestMapping(method=POST, path="", consumes=APPLICATION_JSON_VALUE, produces=APPLICATION_JSON_VALUE)
 	@Transactional(readOnly = false)
 	public ResponseEntity<UserDTO> save(@RequestBody UserDTO resource) throws Exception {
@@ -46,7 +52,7 @@ public class UserRestController {
 		return new ResponseEntity<UserDTO>(resource, CREATED);
 	}
 
-	@RequestMapping(method=PUT, path="/{id}", consumes=APPLICATION_JSON_VALUE, produces=APPLICATION_JSON_VALUE)
+	@RequestMapping(method=PUT, path="/{id}")
 	@Transactional(readOnly = false)
 	public ResponseEntity<UserDTO> update(@PathVariable("id") String id, @RequestBody String jsonPatch) throws Exception {
 		
@@ -55,7 +61,7 @@ public class UserRestController {
 		return new ResponseEntity<UserDTO>(NO_CONTENT);
 	}
 
-	@RequestMapping(method=DELETE, path="/{id}", consumes=APPLICATION_JSON_VALUE, produces=APPLICATION_JSON_VALUE)
+	@RequestMapping(method=DELETE, path="/{id}")
 	@Transactional(readOnly = false)
 	public ResponseEntity<UserDTO> delete(@PathVariable("id") String id) throws Exception {
 
